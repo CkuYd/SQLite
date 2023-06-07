@@ -4,7 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@drawable/background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户登陆注册管理系统"
+        android:textSize="24sp"
+        android:id="@+id/title" />
 
     <EditText
         android:id="@+id/etUsername"
@@ -12,7 +20,8 @@
         android:layout_height="wrap_content"
         android:hint="用户名"
         android:inputType="text"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:layout_below="@+id/title" />
 
     <EditText
         android:id="@+id/etPassword"

@@ -1,6 +1,4 @@
 package com.itcast.sqlite;
-
-//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,17 +25,19 @@ public class ChangePasswordActivity extends AppCompatActivity {
         btnChangePassword = findViewById(R.id.btnChangePassword);
 
         databaseHelper = new DatabaseHelper(this);
-
+//设置修改密码按钮的点击事件监听器，点击修改密码按钮时，会创建 DatabaseHelper 对象并调用 changePassword() 方法执行修改密码操作
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String oldPassword = etOldPassword.getText().toString();
                 String newPassword = etNewPassword.getText().toString();
-
+                // 调用 changePassword() 方法执行修改密码操作
                 if (databaseHelper.changePassword(oldPassword, newPassword)) {
+                    // 显示密码修改成功的提示信息
                     Toast.makeText(ChangePasswordActivity.this, "密码修改成功", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
+                    // 显示密码修改失败的提示信息
                     Toast.makeText(ChangePasswordActivity.this, "密码修改失败，请检查旧密码", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+//声明类并继承自 SQLiteOpenHelper
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "mydatabase.db";
@@ -18,10 +18,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             COLUMN_USERNAME + " TEXT PRIMARY KEY, " +
             COLUMN_PASSWORD + " TEXT)";
 
+    //定义构造函数
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    //实现 onCreate() 和 onUpgrade() 方法
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_USERS);
@@ -33,6 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //实现插入用户数据的 insertUser() 方法
     public boolean insertUser(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -42,6 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    //实现修改密码的 changePassword() 方法
     public boolean changePassword(String oldPassword, String newPassword) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -52,6 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
+    //实现获取所有数据的 getAllData() 方法
     public String getAllData() {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = {COLUMN_USERNAME, COLUMN_PASSWORD};
@@ -61,13 +66,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             String username = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME));
             String password = cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD));
-            stringBuilder.append("Username: ").append(username).append(", Password: ").append(password).append("\n");
+            stringBuilder.append("用户名：").append(username).append(", 密码：").append(password).append("\n");
         }
 
         cursor.close();
         return stringBuilder.toString();
     }
 
+    //实现删除数据的 deleteData() 方法
     public void deleteData(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         String whereClause = COLUMN_USERNAME + " = ?";
@@ -75,3 +81,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_USERS, whereClause, whereArgs);
     }
 }
+//实现增删改查的功能

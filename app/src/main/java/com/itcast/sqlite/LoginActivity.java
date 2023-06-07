@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnRegister;
 
     private DatabaseHelper databaseHelper;
-
+//设置布局和初始化视图
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
 
         databaseHelper = new DatabaseHelper(this);
-
+//设置登录按钮的点击事件监听器，验证登录
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
+//设置注册按钮的点击事件监听器，跳转到注册页面
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //定义 validateLogin() 方法用于验证登录：
     private boolean validateLogin(String username, String password) {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         String[] columns = {"username"};
