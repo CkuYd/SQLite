@@ -1,5 +1,4 @@
 package com.itcast.sqlite;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
